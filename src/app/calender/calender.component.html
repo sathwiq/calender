@@ -12,7 +12,7 @@
        </mat-card> 
     </div>
     <div class=" mt-2 col-9 col-md-7  ml-md-2    mt-md-0 p-0  ml-auto  mr-auto">
-      <mat-card   style="min-height: 92vh;border-radius: 12px;">
+      <mat-card   style=" height: 92vh;border-radius: 12px; overflow-y: scroll;">
         <h2 class="page-title">Events of {{months[currentMonth-1]}}  {{currentYear}}</h2> 
         
         <router-outlet></router-outlet>
@@ -32,11 +32,14 @@
                         </mat-panel-title> 
                       </mat-expansion-panel-header>
                       <h4>Events</h4>
-                      <div *ngFor="let i  of item.events"> 
-                        <p>Name :  {{i.name}}  Description : {{i.description}} </p> 
-                        <p>Start Time : {{i.start_time}}  End Time : {{i.end_time}}</p>   
-                        <hr>
-                       </div>
+                      <div class="row">
+                        <div *ngFor="let i  of item.events" class="col-11 col-md-5">  
+                          <mat-card>
+                            <p>Name :  {{i.name}} </p><p> Description : {{i.description}} </p> 
+                          <p>Start Time : {{i.start_time}} </p><p>  End Time : {{i.end_time}}</p>   
+                          </mat-card> 
+                        </div>
+                      </div>
                        
                     </mat-expansion-panel>
                

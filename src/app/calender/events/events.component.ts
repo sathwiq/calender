@@ -14,16 +14,16 @@ export class EventsComponent implements OnInit {
   date ;
   searchedEvents = []
   monthlyEvents
-  ngOnInit() { console.log('aaa')
+  ngOnInit() {   
       this.date = this.events.getSelectedday()
       this.events.getSeleteddayUpdateListener()
         .subscribe(e =>{
-          console.log(e)
+          // console.log(e)
         })
       this.monthlyEvents = this.events.getMonthlyEvents()
       this.events.getMonthlyEventsUpdateListener()
         .subscribe(e =>{
-          console.log(e)
+          // console.log(e)
            this.monthlyEvents = e
         })
   }
@@ -31,6 +31,7 @@ export class EventsComponent implements OnInit {
     this.events.deleteEvent(this.date.l)
   }
   edit(){
+    console.log('fuck')
     this.router.navigateByUrl('edit')
   }
   onSearch(form : NgForm){

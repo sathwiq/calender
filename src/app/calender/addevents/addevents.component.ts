@@ -53,15 +53,30 @@ export class AddeventsComponent implements OnInit {
         "-" +
         ("00" +  dateN.getDate()).slice(-2);
         this.dateNow =  date1.split("-")
-         
-        let selectedDate = this.date[0].split("-")
+        console.log(this.date)
+        let selectedDate
+        if(this.date[0].date){
+          selectedDate = this.date[0].date.split("-")
+        }else{
+          selectedDate = this.date[0].split("-")
+        }
+        
         if( parseInt(selectedDate[0]) >= parseInt(this.dateNow[0])   && 
         parseInt( selectedDate[1]) >=  parseInt(this.dateNow[1])  &&   parseInt(selectedDate[2])  >= parseInt(this.dateNow[2]) ){
           this.greater = true 
         }
   }
-  onAdd(form : NgForm){
-    console.log(form.value.pre)
+  error = false
+  msg = ''
+  onAdd(form : NgForm){ 
+    if(form.invalid){
+      return
+    }
+    if(form.value.start_time > form.value.end_time){
+       this.error = true 
+      this.msg = 'please select starting time less than end time'
+      return
+    }
     this.events.addEvent(form.value)
     form.onReset()
     this.router.navigateByUrl('')

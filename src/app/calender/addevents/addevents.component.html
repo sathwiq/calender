@@ -12,6 +12,7 @@
      name="end_time" 
     ngModel #eInput="ngModel"  required  placeholder="End TIme">
     </mat-form-field><br>
+    
     <mat-form-field>
         <input matInput name="name"  maxlength="200" minlength="4" ngModel type="text" placeholder=" Name" #nameInput="ngModel"  required >
         <mat-error *ngIf="nameInput.invalid">Please enter a valid  name.</mat-error>
@@ -29,6 +30,7 @@
       ngModel #dInput="ngModel"  required  placeholder="Remind Before">
       </mat-form-field><br> 
     <br>
+    <mat-error *ngIf="error"> {{msg}}</mat-error>
     <button mat-raised-button color="accent">Add</button>
 </form>
  
