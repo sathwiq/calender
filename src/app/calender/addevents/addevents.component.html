@@ -1,0 +1,34 @@
+<h3>Add Event for the  day {{date[0].date  ||date }} </h3>
+
+<!-- <button [routerLink]="['/']" routerLinkActive="router-link-active"  mat-raised-button style="float: right;" color="accent" (click)="back()">Go Back</button> -->
+<form  (submit)="onAdd(eventsForm)" #eventsForm="ngForm" >
+    <mat-form-field  >
+        <input matInput type="time"
+       name="start_time" 
+      ngModel #sInput="ngModel"  required  placeholder="Start Time">
+      </mat-form-field><br>
+    <mat-form-field  >
+      <input matInput type="time"
+     name="end_time" 
+    ngModel #eInput="ngModel"  required  placeholder="End TIme">
+    </mat-form-field><br>
+    <mat-form-field>
+        <input matInput name="name"  maxlength="200" minlength="4" ngModel type="text" placeholder=" Name" #nameInput="ngModel"  required >
+        <mat-error *ngIf="nameInput.invalid">Please enter a valid  name.</mat-error>
+    </mat-form-field> <br>
+    <mat-form-field>
+        <input matInput name="description"  maxlength="200" minlength="4" ngModel type="text" placeholder=" Description" #dInput="ngModel"  required >
+        <mat-error *ngIf="dInput.invalid">Please enter a valid  description.</mat-error>
+    </mat-form-field> <br>
+    <mat-checkbox  name="remind" ngModel #pInput="ngModel" >Remind Me</mat-checkbox>
+    <br>
+    <br>
+    <mat-form-field *ngIf="pInput.value">
+        <input matInput type="time"
+       name="remind_before" 
+      ngModel #dInput="ngModel"  required  placeholder="Remind Before">
+      </mat-form-field><br> 
+    <br>
+    <button mat-raised-button color="accent">Add</button>
+</form>
+ 

@@ -1,0 +1,45 @@
+<div class=" ml-5  row p-0 m-0"  > 
+    <mat-card  class="  col-md-3 "   style=" border-radius: 12px;">     
+     <h2 class="page-title">Calender</h2> 
+     <mat-calendar #calendar
+         (selectedChange)="select($event,calendar)" 
+         (monthSelected)="monthSelected($event)"
+         [dateClass]="isSelected" [minDate]="dateNow">
+         
+        </mat-calendar> 
+    </mat-card> 
+    <mat-card class=" col-md-8  ml-2  " style="min-height: 87vh;border-radius: 12px;">
+     <h2 class="page-title">Events of {{months[currentMonth-1]}}  {{currentYear}}</h2> 
+     
+     <router-outlet></router-outlet>
+
+     <hr>
+
+    <div  *ngIf="monthlyEvents.length">
+        <div  *ngIf="monthlyEvents[0].date !=  undefined">
+            Events of the month <br>
+            <!-- {{monthlyEvents | json}} -->
+
+            <mat-accordion>
+                <mat-expansion-panel *ngFor="let item of monthlyEvents">
+                   <mat-expansion-panel-header>
+                     <mat-panel-title>
+                       {{item.date}}
+                     </mat-panel-title> 
+                   </mat-expansion-panel-header>
+                   <h4>Events</h4>
+                   <div *ngFor="let i  of item.events"> 
+                     <p>Name :  {{i.name}}  Description : {{i.description}} </p> 
+                     <p>Start Time : {{i.start_time}}  End Time : {{i.end_time}}</p>   
+                     <hr>
+                    </div>
+                    
+                 </mat-expansion-panel>
+            
+               </mat-accordion>
+        </div>
+    
+    </div>
+    
+    </mat-card>
+</div>

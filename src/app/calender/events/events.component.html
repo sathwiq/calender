@@ -1,0 +1,59 @@
+<form  (submit)="onSearch(eventsForm)" #eventsForm="ngForm" >
+ 
+      
+    <mat-form-field>
+        <input matInput name="name"  maxlength="200" minlength="4" ngModel type="text" placeholder="Name" #nameInput="ngModel"  required >
+        <mat-error *ngIf="nameInput.invalid">Please enter a valid  name.</mat-error>
+    </mat-form-field>  
+
+    <button mat-raised-button color="accent">Search</button>
+  </form>
+<div *ngIf="searchedEvents.length ">
+  <!-- {{searchedEvents | json}} -->
+  <mat-accordion>
+    <mat-expansion-panel *ngFor="let i of searchedEvents">
+       <mat-expansion-panel-header>
+         <mat-panel-title>
+           {{i .date}}
+         </mat-panel-title> 
+       </mat-expansion-panel-header>
+       <h4>Events</h4>
+       <p  > {{i.name}} {{i.description}}  {{i.start_time}}  {{i.end_time}}</p> 
+        <p>Name :  {{i.name}}  Description : {{i.description}} </p> 
+        <p>Start Time : {{i.start_time}}  End Time : {{i.end_time}}</p>   
+        <hr> 
+     </mat-expansion-panel>
+
+   </mat-accordion>
+</div>
+<button mat-raised-button color="primary" style="float: right;" (click)="delete()" *ngIf="date.length > 0">Delete</button>
+<button mat-raised-button color="primary" style="float: right;" (click)="edit()" *ngIf="date.length > 0">Edit</button>
+ <br>
+<div *ngIf="monthlyEvents.length">
+  Events of the day {{ date[0].date}} <br>
+  <mat-accordion>
+    <mat-expansion-panel *ngFor="let item of date">
+       <mat-expansion-panel-header>
+         <mat-panel-title>
+           {{item.date}}
+         </mat-panel-title> 
+       </mat-expansion-panel-header>
+       <h4>Events</h4>
+       <div *ngFor="let i  of item.events"> 
+        <p>Name :  {{i.name}}  Description : {{i.description}} </p> 
+        <p>Start Time : {{i.start_time}}  End Time : {{i.end_time}}</p>   
+        <hr>
+       </div>
+     </mat-expansion-panel>
+
+   </mat-accordion>
+  
+</div>
+
+<div *ngIf="monthlyEvents.length">
+  <h3 *ngIf="date.length > 0">Do you want to add another Event to the day {{ date[0].date}}</h3>
+  <button mat-raised-button color="primary"  (click)="add =  true" *ngIf="date.length > 0 && !add">Add</button>
+  <button mat-raised-button color="accent"  (click)="add = false" *ngIf="date.length > 0 &&  add" style="float: right;">Close</button>
+
+</div>
+<app-addevents  *ngIf="add"></app-addevents>

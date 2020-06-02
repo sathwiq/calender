@@ -1,0 +1,26 @@
+ <!-- {{date | json}} -->
+<h4>Edit events for {{date[0].date}} </h4>
+<button [routerLink]="['/']" routerLinkActive="router-link-active"  mat-raised-button style="float: right;" color="accent">Go Back</button>
+ <form  (submit)="onEdit(eventsForm)" #eventsForm="ngForm" > 
+    <div *ngFor="let item of date[0].events;let i = index">
+        <mat-form-field>
+            <input matInput name="name"  maxlength="200" minlength="4" [(ngModel)]="date[0].events[i].name" type="text" placeholder=" Name" #nameInput="ngModel"  required >
+            <mat-error *ngIf="nameInput.invalid">Please enter a valid  name.</mat-error>
+        </mat-form-field> <br>
+        <mat-form-field>
+            <input matInput name="description"  maxlength="200" minlength="4" [(ngModel)]="date[0].events[i].description" type="text" placeholder=" Description" #dInput="ngModel"  required >
+            <mat-error *ngIf="dInput.invalid">Please enter a valid  description.</mat-error>
+        </mat-form-field> <br>
+        <mat-checkbox  name="remind" [(ngModel)]="date[0].events[i].remind" #pInput="ngModel" >Remind Me</mat-checkbox>
+        <br>
+        <br>
+        <mat-form-field *ngIf="pInput.value">
+            <input matInput type="time"
+           name="remind_before" 
+           [(ngModel)]="date[0].events[i].remind_before" #dInput="ngModel"  required  placeholder="Remind Before">
+          </mat-form-field><br>
+        <br> 
+    </div>
+    <button mat-raised-button color="accent">Submit</button>
+</form>
+ 
