@@ -2,11 +2,11 @@
   <div class="   row p-0 m-0 "  > 
     <div class="col-9 col-md-3 p-0  ml-auto  mr-auto">
       <mat-card   style=" border-radius: 12px;">     
-        <h2 class="page-title">Calender</h2> 
+        <h2 class="page-title">Calendar</h2> 
         <mat-calendar #calendar
             (selectedChange)="select($event,calendar)" 
             (monthSelected)="monthSelected($event)"
-            [dateClass]="isSelected" [minDate]="dateNow">
+            [dateClass]="isSelected"  >
             
            </mat-calendar> 
        </mat-card> 
@@ -21,7 +21,7 @@
    
        <div  *ngIf="monthlyEvents.length">
            <div  *ngIf="monthlyEvents[0].date !=  undefined">
-               Events of the month <br>
+               Events of the month <br><br>
                <!-- {{monthlyEvents | json}} -->
    
                <mat-accordion>

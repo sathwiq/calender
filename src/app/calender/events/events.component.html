@@ -6,7 +6,7 @@
         <mat-error *ngIf="nameInput.invalid">Please enter a valid  name.</mat-error>
     </mat-form-field>  
 
-    <button mat-raised-button color="accent">Search</button>
+    <button mat-icon-button color="accent"><mat-icon>search</mat-icon>    </button>
   </form>
 <div *ngIf="searchedEvents.length ">
   <!-- {{searchedEvents | json}} -->
@@ -26,11 +26,12 @@
 
    </mat-accordion>
 </div>
-<button mat-icon-button color="primary" style="float: right;" (click)="delete()" *ngIf="date.length > 0"><mat-icon>delete </mat-icon></button>
-<button mat-icon-button color="primary" style="float: right;" (click)="edit()" *ngIf="date.length > 0"><mat-icon>edit</mat-icon>
-</button>
+
  <br>
 <div *ngIf="monthlyEvents.length">
+  <button mat-icon-button color="primary" style="float: right;" (click)="delete()" *ngIf="date.length > 0"><mat-icon>delete </mat-icon></button>
+<button mat-icon-button color="primary" style="float: right;" (click)="edit()" *ngIf="date.length > 0"><mat-icon>edit</mat-icon>
+</button>
   Events of the day {{ date[0].date}} <br>
   <mat-accordion>
     <mat-expansion-panel *ngFor="let item of date">

@@ -52,7 +52,7 @@ export class EventsService {
     }
     console.log(this.selectedDate)
   }
-  addday(a: any){
+  addday(a: any , event){
     if(this.events.length == 0){
       this.day = []
     }
@@ -103,6 +103,9 @@ export class EventsService {
     this.events.splice(n,1)
     console.log(this.events)
     this.selectEvent(this.selectedDate[0].date)
+    this.selectedMonthlyEvents = []
+    this.selectedMonthlyEventsUpdated.next(this.selectedMonthlyEvents)
+    // this.getEventsMonth(this.currentMonth,this.curentYear)
   }
   editEvent(a : any){
     this.events[a[0].l] = a

@@ -94,10 +94,10 @@ export class CalenderComponent implements OnInit , AfterViewInit {
     const index = this.daysSelected.findIndex(x => x == date);
     if (index < 0) { 
       console.log(date)
-      this.events.addday(date)
+      this.events.addday(date , event )
     }
     else  { 
-      this.events.selectEvent(date)
+      this.events.selectEvent(date )
     }
     
     calendar.updateTodaysDate();

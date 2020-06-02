@@ -1,7 +1,7 @@
 <h3>Add Event for the  day {{date[0].date  ||date }} </h3>
 
 <!-- <button [routerLink]="['/']" routerLinkActive="router-link-active"  mat-raised-button style="float: right;" color="accent" (click)="back()">Go Back</button> -->
-<form  (submit)="onAdd(eventsForm)" #eventsForm="ngForm" >
+<form  (submit)="onAdd(eventsForm)" #eventsForm="ngForm"  *ngIf="greater;else not">
     <mat-form-field  >
         <input matInput type="time"
        name="start_time" 
@@ -32,3 +32,7 @@
     <button mat-raised-button color="accent">Add</button>
 </form>
  
+
+ <ng-template #not>
+    For past days events can't be added
+ </ng-template>
