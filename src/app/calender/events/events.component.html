@@ -26,8 +26,9 @@
 
    </mat-accordion>
 </div>
-<button mat-raised-button color="primary" style="float: right;" (click)="delete()" *ngIf="date.length > 0">Delete</button>
-<button mat-raised-button color="primary" style="float: right;" (click)="edit()" *ngIf="date.length > 0">Edit</button>
+<button mat-icon-button color="primary" style="float: right;" (click)="delete()" *ngIf="date.length > 0"><mat-icon>delete </mat-icon></button>
+<button mat-icon-button color="primary" style="float: right;" (click)="edit()" *ngIf="date.length > 0"><mat-icon>edit</mat-icon>
+</button>
  <br>
 <div *ngIf="monthlyEvents.length">
   Events of the day {{ date[0].date}} <br>
