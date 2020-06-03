@@ -24,7 +24,7 @@
 </div> 
 </mat-card>
  <br>
-<div *ngIf="monthlyEvents.length" class="small">
+<div *ngIf="monthlyEvents.length"  >
   <button mat-icon-button color="primary" style="float: right;" (click)="delete()" *ngIf="date.length > 0"><mat-icon>delete </mat-icon></button>
           <button mat-icon-button color="primary" style="float: right;" (click)="edit()" *ngIf="date.length > 0"><mat-icon>edit</mat-icon>
           </button> 
