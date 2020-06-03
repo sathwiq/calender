@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { EventsService } from 'src/app/shared/events.service';
-import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router'; 
 
 @Component({
   selector: 'app-addevents',

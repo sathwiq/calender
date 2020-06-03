@@ -11,8 +11,7 @@ import { EditeventsComponent } from './calender/editevents/editevents.component'
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
-import { MomentModule } from 'ngx-moment';
-import { ToastrModule } from 'ngx-toastr';
+import { MomentModule } from 'ngx-moment'; 
 
 @NgModule({
   declarations: [
@@ -29,8 +28,7 @@ import { ToastrModule } from 'ngx-toastr';
     AppRoutingModule,
     FormsModule,
     NgxMaterialTimepickerModule,
-    MomentModule,
-    ToastrModule.forRoot() 
+    MomentModule, 
 
   ],
   providers: [],

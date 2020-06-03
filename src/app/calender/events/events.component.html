@@ -1,4 +1,5 @@
-<form  (submit)="onSearch(eventsForm)" #eventsForm="ngForm" >
+<mat-card>
+  <form  (submit)="onSearch(eventsForm)" #eventsForm="ngForm" >
  
       
     <mat-form-field>
@@ -26,6 +27,7 @@
   </div>
 
 </div> 
+</mat-card>
  <br>
 <div *ngIf="monthlyEvents.length" class="small">
   <button mat-icon-button color="primary" style="float: right;" (click)="delete()" *ngIf="date.length > 0"><mat-icon>delete </mat-icon></button>
