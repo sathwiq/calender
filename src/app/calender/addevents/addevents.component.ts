@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { EventsService } from 'src/app/shared/events.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-addevents',
@@ -10,12 +11,12 @@ import { Router } from '@angular/router';
 })
 export class AddeventsComponent implements OnInit {
 
-  constructor(private events : EventsService, private router : Router) { }
+  constructor(private events : EventsService, private router : Router  ) { }
   dateNow  = [ ]
   date
   greater = false
-  ngOnInit() {
-    
+  ngOnInit() { 
+
     this.date = this.events.getSelectedday()
     this.events.getSeleteddayUpdateListener()
       .subscribe(e =>{
@@ -37,8 +38,7 @@ export class AddeventsComponent implements OnInit {
         if(  selectedDate[0]  >=  this.dateNow[0]   && 
         parseInt( selectedDate[1]) >=  parseInt(this.dateNow[1])  && 
           parseInt(selectedDate[2])  >= parseInt(this.dateNow[2]) ){
-          this.greater = true 
-          console.log('fuck')
+          this.greater = true  
         }
       })
 
@@ -82,28 +82,36 @@ export class AddeventsComponent implements OnInit {
       this.msg = 'please select remind before time less than start time'
       return
     } 
-    this.events.addEvent(form.value)
+    
     let event =form.value
-    if(event.remind){
-      console.log(this.date  )
+    if(event.remind){ 
       let remind = new Date()
-      remind.setDate(parseInt (this.date[0].date.split("-")[2]  ))
-      remind.setFullYear(this.date[0].date.split("-")[0]  )
-      remind.setMonth(parseInt (this.date[0].date.split("-")[1])-1)
+      if(this.date[0].date){
+        remind.setDate(parseInt (this.date[0].date.split("-")[2]  )) 
+        remind.setFullYear(this.date[0].date.split("-")[0]  ) 
+        remind.setMonth(parseInt (this.date[0].date.split("-")[1])-1) 
+      }else{
+        remind.setDate(parseInt (this.date[0].split("-")[2]  ))
+ 
+        remind.setFullYear(this.date[0].split("-")[0]  ) 
+        remind.setMonth(parseInt (this.date[0].split("-")[1])-1)  
+      }
       remind.setHours(parseInt ( event.remind_before ))
-      remind.setMinutes(parseInt ( event.remind_before.split(":")[1]  ))
-      console.log(remind)
+      remind.setMinutes(parseInt ( event.remind_before.split(":")[1]  )) 
       let milli = remind.getTime()
       let dnow  = new Date()
-      console.log(dnow)
+      // console.log(dnow)
       let milldnow = dnow.getTime()
       const l =  Math.abs(milli -  milldnow);
-      console.log(milli)  
-      console.log(milldnow)
+      // console.log(milli)  
+      // console.log(milldnow)
       setTimeout(()=>{  
-        console.log(l) 
-      },(l  ));
+         this.events.msg(event.name)
+         console.log(event.name)
+      }, l   );
+      form.value['alerts'] = remind
     }
+    this.events.addEvent(form.value)
     form.onReset()
     this.router.navigateByUrl('')
   }

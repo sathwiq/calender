@@ -12,6 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import { MomentModule } from 'ngx-moment';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,9 @@ import { MomentModule } from 'ngx-moment';
     AppRoutingModule,
     FormsModule,
     NgxMaterialTimepickerModule,
-    MomentModule
+    MomentModule,
+    ToastrModule.forRoot() 
+
   ],
   providers: [],
   bootstrap: [AppComponent]

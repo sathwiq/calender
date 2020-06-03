@@ -21,7 +21,10 @@
 
 </div>
 <div  *ngIf="display">
-  No event found
+  <div *ngIf="searchedEvents.length == 0">
+    No event found
+  </div>
+
 </div> 
  <br>
 <div *ngIf="monthlyEvents.length" class="small">
@@ -40,6 +43,8 @@
           <mat-card>
             <p>Name :  {{i.name}} </p><p> Description : {{i.description}} </p> 
           <p>Start Time : {{i.start_time}} </p><p>  End Time : {{i.end_time}}</p>   
+         
+          <p>Alerts in {{i.alerts | amDifference: today :'minutes' : true | number : '1.2-2' }}  minutes</p>
           </mat-card> 
         </div>
       </div>

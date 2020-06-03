@@ -1,5 +1,6 @@
 import { Component, OnInit ,ViewEncapsulation, AfterViewInit, Renderer2} from '@angular/core';
 import { EventsService } from '../shared/events.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-calender',
@@ -14,6 +15,8 @@ export class CalenderComponent implements OnInit , AfterViewInit {
   months = ['January' , 'February', 'March' , 'April', 'May', 'June' , 'July', 'August', 'September','October','November','December']
   constructor(private events : EventsService, private renderer: Renderer2) { }
   ngOnInit(): void { 
+    
+
     this.daysSelected = this.events.getDay()
     this.events.getdayUpdateListener()
       .subscribe(posts=>{
@@ -30,8 +33,7 @@ export class CalenderComponent implements OnInit , AfterViewInit {
         .subscribe(e =>{ 
            this.monthlyEvents = e
         })
-
-
+      
   }
   ngAfterViewInit() {
     const buttons = document.querySelectorAll('.mat-calendar-next-button');

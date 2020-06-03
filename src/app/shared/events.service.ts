@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class EventsService {
   private selectedUpdated = new Subject<any>();
   private selectedMonthlyEvents = [] ;
   private selectedMonthlyEventsUpdated = new Subject<any>();
-  constructor(private router : Router) {
+  constructor(private router : Router,private snackBar: MatSnackBar) {
     router.navigateByUrl('')
   }
   getDay(){
@@ -32,7 +33,7 @@ export class EventsService {
     return this.selectedUpdated.asObservable();
   }
   selectEvent(a : any){
-    console.log(a) 
+    // console.log(a) 
     this.selectedDate.pop()
     let i = -1
      this.events.forEach((b,idx)=>{
@@ -40,7 +41,7 @@ export class EventsService {
         i = idx
       } 
     })
-     console.log(i)
+    //  console.log(i)
     if( i >= 0 ){
       this.selectedDate.push(this.events[i])
       this.router.navigateByUrl('')
@@ -50,14 +51,14 @@ export class EventsService {
       this.selectedUpdated.next(this.selectedDate)
       this.router.navigateByUrl('add')
     }
-    console.log(this.selectedDate)
+    // console.log(this.selectedDate)
   }
   addday(a: any , event){
     if(this.events.length == 0){
       this.day = []
     }
     this.events.forEach((b,idx)=>{
-      console.log(b.date)
+      // console.log(b.date)
 
       if(b.date !==  this.day[this.day.length-1]){
             this.day.pop()
@@ -66,7 +67,7 @@ export class EventsService {
    })
     
     this.day.push(a)
-    console.log(this.day)
+    // console.log(this.day)
     this.Updated.next(this.day)
     this.selectEvent(a)
   }
@@ -96,34 +97,37 @@ export class EventsService {
     
     this.events.push(d) 
     this.getEventsMonth(this.currentMonth,this.curentYear) 
-    
+    this.msg('event added successfully')
     this.selectEvent(d['date'])
 
     
   }
   deleteEvent(n){
     this.events.splice(n,1)
-    console.log(this.events)
+    // console.log(this.events)
     this.selectEvent(this.selectedDate[0].date)
     this.selectedMonthlyEvents = []
     this.selectedMonthlyEventsUpdated.next(this.selectedMonthlyEvents)
+    this.msg('deleted successfully')
     // this.getEventsMonth(this.currentMonth,this.curentYear)
   }
   editEvent(a : any){
     this.events[a[0].l] = a
+    this.router.navigateByUrl('')
+    this.msg('edited successfully')
   } 
   search(name){
     let e=[ ]
     this.events.forEach((b,idx)=>{
        b.events.forEach((ev,idx)=>{
          if(ev.name == name){
-           console.log(ev)
+          //  console.log(ev)
            ev['date'] = b.date
            e.push(ev)
          }
        })
     })
-    console.log(e)
+    // console.log(e)
     return e
   }
   getEventsMonth(month , year){
@@ -138,7 +142,7 @@ export class EventsService {
           
         this.selectedMonthlyEvents.push(b)
       }
-      console.log(this.selectedMonthlyEvents)
+      // console.log(this.selectedMonthlyEvents)
       this.selectedMonthlyEventsUpdated.next(this.selectedMonthlyEvents)
    })
 
@@ -150,5 +154,10 @@ export class EventsService {
   }
   getMonthlyEventsUpdateListener() {
     return this.selectedMonthlyEventsUpdated.asObservable();
+  }
+  msg(msg){
+    this.snackBar.open(msg,'', {
+      duration: 3000
+    });
   }
 }
