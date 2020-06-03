@@ -89,15 +89,17 @@ export class EventsService {
         date : this.selectedDate[0],
         l : this.events.length,
         events : []
-      } 
-    }
+      }  
+    }   
+    
     d['events'].push(event)
     
     this.events.push(d) 
-    this.getEventsMonth(this.currentMonth,this.curentYear)
-    console.log(this.events)
+    this.getEventsMonth(this.currentMonth,this.curentYear) 
     
     this.selectEvent(d['date'])
+
+    
   }
   deleteEvent(n){
     this.events.splice(n,1)
@@ -128,9 +130,7 @@ export class EventsService {
     this.currentMonth = month
     this.curentYear = year
     // console.log(a.split("-")[1]) 
-    this.selectedMonthlyEvents = []
-    console.log(this.selectedMonthlyEvents)
-    console.log(this.events)
+    this.selectedMonthlyEvents = [] 
     this.events.forEach((b,idx)=>{
       // console.log(b.date)
 

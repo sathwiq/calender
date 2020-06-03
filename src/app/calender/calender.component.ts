@@ -17,8 +17,7 @@ export class CalenderComponent implements OnInit , AfterViewInit {
     this.daysSelected = this.events.getDay()
     this.events.getdayUpdateListener()
       .subscribe(posts=>{
-        this.daysSelected =   this.events.getDay()
-        console.log(this.daysSelected)
+        this.daysSelected =   this.events.getDay() 
       }) 
     
     this.currentMonth = parseInt(("00" + (this.dateNow.getMonth() + 1)).slice(-2)) 
@@ -28,8 +27,7 @@ export class CalenderComponent implements OnInit , AfterViewInit {
 
     this.monthlyEvents = this.events.getMonthlyEvents()
       this.events.getMonthlyEventsUpdateListener()
-        .subscribe(e =>{
-          console.log(e)
+        .subscribe(e =>{ 
            this.monthlyEvents = e
         })
 
@@ -92,8 +90,7 @@ export class CalenderComponent implements OnInit , AfterViewInit {
       "-" +
       ("00" + event.getDate()).slice(-2);
     const index = this.daysSelected.findIndex(x => x == date);
-    if (index < 0) { 
-      console.log(date)
+    if (index < 0) {  
       this.events.addday(date , event )
     }
     else  { 
@@ -102,7 +99,6 @@ export class CalenderComponent implements OnInit , AfterViewInit {
     
     calendar.updateTodaysDate();
   }
-  monthSelected(event ){
-    console.log(event)
+  monthSelected(event ){ 
   }
 }

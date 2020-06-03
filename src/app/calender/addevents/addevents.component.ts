@@ -76,8 +76,34 @@ export class AddeventsComponent implements OnInit {
        this.error = true 
       this.msg = 'please select starting time less than end time'
       return
-    }
+    } 
+    if( form.value.remind_before >  form.value.start_time  ){
+      this.error = true 
+      this.msg = 'please select remind before time less than start time'
+      return
+    } 
     this.events.addEvent(form.value)
+    let event =form.value
+    if(event.remind){
+      console.log(this.date  )
+      let remind = new Date()
+      remind.setDate(parseInt (this.date[0].date.split("-")[2]  ))
+      remind.setFullYear(this.date[0].date.split("-")[0]  )
+      remind.setMonth(parseInt (this.date[0].date.split("-")[1])-1)
+      remind.setHours(parseInt ( event.remind_before ))
+      remind.setMinutes(parseInt ( event.remind_before.split(":")[1]  ))
+      console.log(remind)
+      let milli = remind.getTime()
+      let dnow  = new Date()
+      console.log(dnow)
+      let milldnow = dnow.getTime()
+      const l =  Math.abs(milli -  milldnow);
+      console.log(milli)  
+      console.log(milldnow)
+      setTimeout(()=>{  
+        console.log(l) 
+      },(l  ));
+    }
     form.onReset()
     this.router.navigateByUrl('')
   }

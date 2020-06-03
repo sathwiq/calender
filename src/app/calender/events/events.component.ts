@@ -12,7 +12,7 @@ export class EventsComponent implements OnInit {
   add = false
   constructor(private events : EventsService, private router : Router) { }
   date ;
-  searchedEvents = []
+  searchedEvents =[]
   monthlyEvents
   ngOnInit() {   
       this.date = this.events.getSelectedday()
@@ -34,7 +34,12 @@ export class EventsComponent implements OnInit {
     console.log('fuck')
     this.router.navigateByUrl('edit')
   }
+  search
+  display = false
   onSearch(form : NgForm){
+    this.search = form.value.name
+    this.display = false
     this.searchedEvents =    this.events.search(form.value.name)
+    this.display = true
   }
 }

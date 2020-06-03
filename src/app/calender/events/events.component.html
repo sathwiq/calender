@@ -8,25 +8,21 @@
 
     <button mat-icon-button color="accent"><mat-icon>search</mat-icon>    </button>
   </form>
-<div *ngIf="searchedEvents.length ">
+ 
+<div *ngIf="searchedEvents.length >0  " class="container">
   <!-- {{searchedEvents | json}} -->
-  <mat-accordion>
-    <mat-expansion-panel *ngFor="let i of searchedEvents">
-       <mat-expansion-panel-header>
-         <mat-panel-title>
-           {{i .date}}
-         </mat-panel-title> 
-       </mat-expansion-panel-header>
-       <h4>Events</h4>    
-        <mat-card class="col-11 col-md-5">
-          <p>Name :  {{i.name}} </p><p> Description : {{i.description}} </p> 
-        <p>Start Time : {{i.start_time}} </p><p>  End Time : {{i.end_time}}</p>   
-        </mat-card>  
-     </mat-expansion-panel>
+  <div class="row">
+    <mat-card class="col-11 col-md-3 ml-auto mr-auto mt-2"  *ngFor="let i of searchedEvents">
+      <p>Name :  {{i.name}} </p><p> Description : {{i.description}} </p> 
+      <p>Date : {{i .date}}</p>
+      <p>Start Time : {{i.start_time}} </p><p>  End Time : {{i.end_time}}</p>   
+    </mat-card> 
+  </div> 
 
-   </mat-accordion>
 </div>
-
+<div  *ngIf="display">
+  No event found
+</div> 
  <br>
 <div *ngIf="monthlyEvents.length" class="small">
   <button mat-icon-button color="primary" style="float: right;" (click)="delete()" *ngIf="date.length > 0"><mat-icon>delete </mat-icon></button>
@@ -36,8 +32,18 @@
 </div>
 
  <div  *ngIf="monthlyEvents.length" >
-  Events of the day {{ date[0].date}} <br>
-  <mat-accordion> 
+  Events of the day {{ date[0].date}} <br> 
+  <!-- {{date | json}} -->
+  <br>
+       <div class="row">
+        <div *ngFor="let i  of date[0].events" class="col-11 col-md-5 ml-auto mr-auto mt-2">  
+          <mat-card>
+            <p>Name :  {{i.name}} </p><p> Description : {{i.description}} </p> 
+          <p>Start Time : {{i.start_time}} </p><p>  End Time : {{i.end_time}}</p>   
+          </mat-card> 
+        </div>
+      </div>
+  <!-- <mat-accordion> 
    
     <mat-expansion-panel *ngFor="let item of date">
        <mat-expansion-panel-header>
@@ -50,27 +56,20 @@
           </button>
         </mat-panel-description>
        </mat-expansion-panel-header>
-       <h4>Events</h4>
-       <div class="row">
-        <div *ngFor="let i  of item.events" class="col-11 col-md-5">  
-          <mat-card>
-            <p>Name :  {{i.name}} </p><p> Description : {{i.description}} </p> 
-          <p>Start Time : {{i.start_time}} </p><p>  End Time : {{i.end_time}}</p>   
-          </mat-card> 
-        </div>
-      </div>
+       
      </mat-expansion-panel>
 
-   </mat-accordion>
+   </mat-accordion> -->
  </div>
    
 
+<div *ngIf="monthlyEvents.length" class="row" >
+  <!-- <h3 *ngIf="date.length > 0">Do you want to add another Event to the day {{ date[0].date}}</h3> -->
+  <button mat-icon-button color="primary" class="col-1 m-auto" style="margin-left: auto; margin-right: auto;"  (click)="add =  true" *ngIf="date.length > 0 && !add"><mat-icon>add_box</mat-icon>
+  </button> 
+</div>
 <div *ngIf="monthlyEvents.length">
-  <h3 *ngIf="date.length > 0">Do you want to add another Event to the day {{ date[0].date}}</h3>
-  <button mat-icon-button color="primary"  (click)="add =  true" *ngIf="date.length > 0 && !add"><mat-icon>add_box</mat-icon>
-  </button>
   <button mat-icon-button color="accent"  (click)="add = false" *ngIf="date.length > 0 &&  add" style="float: right;"><mat-icon>replay</mat-icon>
   </button>
-
 </div>
 <app-addevents  *ngIf="add"></app-addevents>
