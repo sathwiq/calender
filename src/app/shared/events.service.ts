@@ -82,7 +82,7 @@ export class EventsService {
     let d= {   } 
     if(this.selectedDate[0].date !== undefined){
       d= this.selectedDate[0]
-      console.log(d)
+      // console.log(d)
       this.events.splice(this.selectedDate[0].l, 1)
     }
     else {
@@ -102,12 +102,20 @@ export class EventsService {
 
     
   }
-  deleteEvent(n){
+  deleteEvents(n){
     this.events.splice(n,1)
     // console.log(this.events)
     this.selectEvent(this.selectedDate[0].date)
     this.selectedMonthlyEvents = []
     this.selectedMonthlyEventsUpdated.next(this.selectedMonthlyEvents)
+    this.msg('deleted successfully')
+    // this.getEventsMonth(this.currentMonth,this.curentYear)
+  }
+  deleteEvent(n,id){ 
+    
+    this.events[ n].events.splice(id,1)
+
+
     this.msg('deleted successfully')
     // this.getEventsMonth(this.currentMonth,this.curentYear)
   }

@@ -1,77 +1,51 @@
 <mat-card>
-  <form  (submit)="onSearch(eventsForm)" #eventsForm="ngForm" >
- 
-      
+  <form  (submit)="onSearch(eventsForm)" #eventsForm="ngForm" > 
     <mat-form-field>
         <input matInput name="name"  maxlength="200" minlength="4" ngModel type="text" placeholder="Name" #nameInput="ngModel"  required >
         <mat-error *ngIf="nameInput.invalid">Please enter a valid  name.</mat-error>
-    </mat-form-field>  
-
+    </mat-form-field>   
     <button mat-icon-button color="accent"><mat-icon>search</mat-icon>    </button>
   </form>
  
-<div *ngIf="searchedEvents.length >0  " class="container">
-  <!-- {{searchedEvents | json}} -->
+<div *ngIf="searchedEvents.length >0  " class="container"> 
   <div class="row">
-    <mat-card class="col-11 col-md-3 ml-auto mr-auto mt-2"  *ngFor="let i of searchedEvents">
+    <mat-card class="col-11 col-md-3 ml-auto mr-auto mt-2" [ngClass]="i.color"  *ngFor="let i of searchedEvents">
+ 
       <p>Name :  {{i.name}} </p><p> Description : {{i.description}} </p> 
       <p>Date : {{i .date}}</p>
       <p>Start Time : {{i.start_time}} </p><p>  End Time : {{i.end_time}}</p>   
     </mat-card> 
-  </div> 
-
+  </div>  
 </div>
 <div  *ngIf="display">
   <div *ngIf="searchedEvents.length == 0">
     No event found
-  </div>
-
+  </div> 
 </div> 
 </mat-card>
  <br>
 <div *ngIf="monthlyEvents.length" class="small">
   <button mat-icon-button color="primary" style="float: right;" (click)="delete()" *ngIf="date.length > 0"><mat-icon>delete </mat-icon></button>
           <button mat-icon-button color="primary" style="float: right;" (click)="edit()" *ngIf="date.length > 0"><mat-icon>edit</mat-icon>
-          </button>
-
-</div>
-
+          </button> 
+</div> 
  <div  *ngIf="monthlyEvents.length" >
-  Events of the day {{ date[0].date}} <br> 
-  <!-- {{date | json}} -->
+  Events of the day {{ date[0].date}} <br>  
   <br>
        <div class="row">
-        <div *ngFor="let i  of date[0].events" class="col-11 col-md-5 ml-auto mr-auto mt-2">  
-          <mat-card>
+        <div *ngFor="let i  of date[0].events;let idx  = index" class="col-11 col-md-5 ml-auto mr-auto mt-2" >  
+          <mat-card [ngClass]="i.color">
+            <button mat-icon-button color="primary" style="float: right;" (click)="deleteEvent(idx)" *ngIf="date.length > 0"><mat-icon>delete </mat-icon></button>
+
             <p>Name :  {{i.name}} </p><p> Description : {{i.description}} </p> 
           <p>Start Time : {{i.start_time}} </p><p>  End Time : {{i.end_time}}</p>   
          
-          <p>Alerts in {{i.alerts | amDifference: today :'minutes' : true | number : '1.2-2' }}  minutes</p>
+          <p *ngIf="i.remind">Alerts in {{i.alerts | amDifference: today :'minutes' : true | number : '1.2-2' }}  minutes</p>
           </mat-card> 
         </div>
-      </div>
-  <!-- <mat-accordion> 
-   
-    <mat-expansion-panel *ngFor="let item of date">
-       <mat-expansion-panel-header>
-         <mat-panel-title>
-           {{item.date}}
-         </mat-panel-title> 
-         <mat-panel-description class="small2">
-          <button mat-icon-button color="primary" style="float: right;" (click)="delete()" *ngIf="date.length > 0"><mat-icon>delete </mat-icon></button>
-          <button mat-icon-button color="primary" style="float: right;" (click)="edit()" *ngIf="date.length > 0"><mat-icon>edit</mat-icon>
-          </button>
-        </mat-panel-description>
-       </mat-expansion-panel-header>
-       
-     </mat-expansion-panel>
-
-   </mat-accordion> -->
- </div>
-   
-
-<div *ngIf="monthlyEvents.length" class="row" >
-  <!-- <h3 *ngIf="date.length > 0">Do you want to add another Event to the day {{ date[0].date}}</h3> -->
+      </div> 
+ </div> 
+<div *ngIf="monthlyEvents.length" class="row" > 
   <button mat-icon-button color="primary" class="col-1 m-auto" style="margin-left: auto; margin-right: auto;"  (click)="add =  true" *ngIf="date.length > 0 && !add"><mat-icon>add_box</mat-icon>
   </button> 
 </div>

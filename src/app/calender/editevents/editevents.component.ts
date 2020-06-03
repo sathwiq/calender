@@ -14,11 +14,11 @@ export class EditeventsComponent implements OnInit {
   ngOnInit() {  
       this.date = this.events.getSelectedday()
       this.events.getSeleteddayUpdateListener()
-        .subscribe(e =>{
-          console.log(e)
+        .subscribe(e =>{ 
         })
   }
   onEdit(form : NgForm){
     console.log(this.date)
+    this.events.editEvent(this.date)
   }
 }

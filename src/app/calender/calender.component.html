@@ -34,7 +34,7 @@
                       <h4>Events</h4>
                       <div class="row">
                         <div *ngFor="let i  of item.events" class="col-11 col-md-5 ml-auto mr-auto mt-2">  
-                          <mat-card>
+                          <mat-card [ngClass]="i.color">
                             <p>Name :  {{i.name}} </p><p> Description : {{i.description}} </p> 
                           <p>Start Time : {{i.start_time}} </p><p>  End Time : {{i.end_time}}</p>   
                           </mat-card> 

@@ -28,10 +28,16 @@ export class EventsComponent implements OnInit {
         })
   }
   delete(){
-    this.events.deleteEvent(this.date.l)
+    this.events.deleteEvents(this.date[0].l)
   }
-  edit(){
-    console.log('fuck')
+  deleteEvent(id){ 
+    if(this.date[0].events.length == 1){
+      this.delete()
+    }
+    else
+    this.events.deleteEvent(this.date[0].l, id)
+  }
+  edit(){ 
     this.router.navigateByUrl('edit')
   }
   search

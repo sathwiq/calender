@@ -30,6 +30,16 @@
       ngModel #dInput="ngModel"  required  placeholder="Remind Before">
       </mat-form-field><br> 
     <br>
+    <mat-form-field appearance="fill"  >
+        <mat-label>Color</mat-label>
+        <mat-select name="color" 
+        ngModel #cInput="ngModel"  required    >
+          <mat-option value="red">Red</mat-option>
+          <mat-option value="grey">Grey</mat-option>
+          <mat-option value="yello">Yellow</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <br>
     <mat-error *ngIf="error"> {{msg}}</mat-error>
     <button mat-raised-button color="accent">Add</button>
 </form>

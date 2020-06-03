@@ -15,12 +15,13 @@ export class AddeventsComponent implements OnInit {
   date
   greater = false
   ngOnInit() { 
-
+//  getting selected day on the calender to add events
     this.date = this.events.getSelectedday()
     this.events.getSeleteddayUpdateListener()
       .subscribe(e =>{
         this.date = e[0]
-        console.log(e)
+        // console.log(e)
+        // to stop users from adding events for past days
         this.greater = false
         let  dateN   = new Date()
         let date1 =
@@ -31,19 +32,15 @@ export class AddeventsComponent implements OnInit {
         ("00" +  dateN.getDate()).slice(-2);
         this.dateNow =  date1.split("-")
 
-        console.log(this.dateNow)
-        console.log(this.date.split("-")  )
+        // console.log(this.dateNow)
+        // console.log(this.date.split("-")  )
         let selectedDate = this.date.split("-")
         if(  selectedDate[0]  >=  this.dateNow[0]   && 
         parseInt( selectedDate[1]) >=  parseInt(this.dateNow[1])  && 
           parseInt(selectedDate[2])  >= parseInt(this.dateNow[2]) ){
           this.greater = true  
         }
-      })
-
-      // this.currentMonth = parseInt(("00" + (this.dateNow.getMonth() + 1)).slice(-2)) 
-      // this.currentYear =  this.dateNow.getFullYear()
-      // ("00" + event.getDate()).slice(-2)
+      }) 
       let  dateN   = new Date()
         let date1 =
          dateN.getFullYear() +
@@ -52,7 +49,7 @@ export class AddeventsComponent implements OnInit {
         "-" +
         ("00" +  dateN.getDate()).slice(-2);
         this.dateNow =  date1.split("-")
-        console.log(this.date)
+        // console.log(this.date)
         let selectedDate
         if(this.date[0].date){
           selectedDate = this.date[0].date.split("-")
@@ -67,6 +64,7 @@ export class AddeventsComponent implements OnInit {
   }
   error = false
   msg = ''
+  // adding  events
   onAdd(form : NgForm){ 
     if(form.invalid){
       return

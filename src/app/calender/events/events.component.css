@@ -8,3 +8,21 @@
         display: none;
     }
 }
+
+.red{
+    background-color: red;
+    color: white;
+    border-radius: 10px;
+}
+.yellow{
+    background-color: yellowgreen;
+    color: white;
+    border-radius: 10px;
+
+}
+.grey{
+    background-color: grey;
+    color: white;
+    border-radius: 10px;
+
+}

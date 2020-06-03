@@ -5,3 +5,20 @@
     background-color:red!important;
     border-radius: 50%
   }
+  .red{
+    background-color: red;
+    color: white;
+    border-radius: 10px !important;
+}
+.yellow{
+    background-color: yellowgreen;
+    color: white;
+    border-radius: 10px !important;
+
+}
+.grey{
+    background-color: grey;
+    color: white;
+    border-radius: 10px !important;
+
+}
